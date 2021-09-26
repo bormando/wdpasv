@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "WebdriverIO tests for localcoding.us",
   "scripts": {
-    "test": "npx wdio run wdio.conf.js"
+    "test": "npx wdio run wdio.conf.js",
+    "report:serve": "npx allure serve allure-results",
+    "report:generate": "npx allure generate allure-results -o allure-report --clean",
+    "report:open": "npx allure open allure-report"
   },
   "keywords": [],
   "author": "Dmitrii Bormotov",
@@ -16,9 +19,11 @@
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "@babel/register": "^7.15.3",
+    "@wdio/allure-reporter": "^7.9.0",
     "@wdio/devtools-service": "^7.10.0",
     "@wdio/local-runner": "^7.10.0",
     "@wdio/mocha-framework": "^7.10.0",
-    "@wdio/spec-reporter": "^7.10.0"
+    "@wdio/spec-reporter": "^7.10.0",
+    "allure-commandline": "^2.13.8"
   }
 }
