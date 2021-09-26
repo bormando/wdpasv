@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "WebdriverIO tests for localcoding.us",
   "scripts": {
-    "test": "npx wdio run wdio.conf.js",
+    "test:chrome": "npx wdio run config/chrome.conf.js",
+    "test:chrome:headless": "npx wdio run config/chrome.headless.conf.js",
+    "test:firefox": "npx wdio run config/firefox.conf.js",
+    "test:firefox:headless": "npx wdio run config/firefox.headless.conf.js",
     "report:serve": "npx allure serve allure-results",
     "report:generate": "npx allure generate allure-results -o allure-report --clean",
     "report:open": "npx allure open allure-report"
@@ -24,6 +27,9 @@
     "@wdio/local-runner": "^7.10.0",
     "@wdio/mocha-framework": "^7.10.0",
     "@wdio/spec-reporter": "^7.10.0",
-    "allure-commandline": "^2.13.8"
+    "allure-commandline": "^2.13.8",
+    "deepmerge": "^4.2.2",
+    "geckodriver": "^2.0.4",
+    "wdio-geckodriver-service": "^2.0.3"
   }
 }
