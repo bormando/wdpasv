@@ -39,11 +39,7 @@ jobs:
 workflows:
   commit:
     jobs:
-      - build-and-test:
-          filters:
-            branches:
-              only:
-                - main
+      - build-and-test
 
   nightly:
     triggers:
