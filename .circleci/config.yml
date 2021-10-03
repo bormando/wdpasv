@@ -1,0 +1,57 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.1
+
+
+jobs:
+  build-and-test:
+    docker:
+      - image: circleci/node:latest-browsers
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          name: Get previous results
+          command: |
+            export ARTIFACT_LINK="https://circleci.com/api/v1.1/project/github/bormando/wdpasv/latest/artifacts"
+            curl $ARTIFACT_LINK -H "Circle-Token $CIRCLE_TOKEN" | grep -Eoq '(http|https)://[a-zA-Z0-9./?=_%:-]*' && wget $(curl $ARTIFACT_LINK -H "Circle-Token $CIRCLE_TOKEN" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_%:-]*') -O allure-previous.zip
+            test -f allure-previous.zip && unzip allure-previous.zip -d allure-previous || echo "Archive not found"
+            ls -la
+      - run:
+          name: Run tests
+          command: |
+            npm run test:chrome:headless
+            ls -la
+            test -d allure-previous && cp -r allure-previous/allure-report/history allure-results || echo "Previous report directory not found"
+            npm run report:generate
+            zip -r allure-report.zip allure-report
+      - run:
+          when: on_fail
+          name: Generate fail results
+          command: |
+            test -d allure-previous && cp -r allure-previous/allure-report/history allure-results || echo "Previous report directory not found"
+            npm run report:generate
+            zip -r allure-report.zip allure-report
+      - store_artifacts:
+          path: allure-report.zip
+
+workflows:
+  commit:
+    jobs:
+      - build-and-test:
+          filters:
+            branches:
+              only:
+                - main
+
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - build-and-test
