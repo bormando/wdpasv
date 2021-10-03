@@ -29,7 +29,7 @@ describe('Auth', () => {
 
     it('password required validation', async () => {
         await LoginPage.inputPassword.setValue('invalid');
-        await LoginPage.inputPassword.smartClear();
+        await LoginPage.inputPassword.clear();
         await expect(LoginPage.passwordValidation).toHaveTextContaining('Required');
     });
 });
