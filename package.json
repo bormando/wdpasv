@@ -28,7 +28,9 @@
     "@wdio/mocha-framework": "^7.10.0",
     "@wdio/spec-reporter": "^7.10.0",
     "allure-commandline": "^2.13.8",
+    "axios": "^0.22.0",
     "deepmerge": "^4.2.2",
+    "dotenv": "^10.0.0",
     "geckodriver": "^2.0.4",
     "wdio-geckodriver-service": "^2.0.3"
   }

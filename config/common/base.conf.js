@@ -1,4 +1,7 @@
 import hooks from './hooks.conf';
+import { config } from 'dotenv';
+
+config();
 
 exports.config = {
     specs: [
@@ -7,7 +10,7 @@ exports.config = {
 
     logLevel: 'info',
     bail: 0,
-    baseUrl: 'https://localcoding.us',
+    baseUrl: process.env.BASE_URL,
     waitforTimeout: 10000,
     connectionRetryTimeout: 30000,
     connectionRetryCount: 1,
