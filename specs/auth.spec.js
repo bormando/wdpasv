@@ -7,7 +7,7 @@ describe('Auth', () => {
     });
 
     it('successful log in', async () => {
-        await LoginPage.login('xonol63306@gameqo.com', 'Qwerty!23');
+        await LoginPage.login(process.env.LOGIN, process.env.PASSWORD);
         await expect(ProfilePage.iconAvatar).toBeDisplayed();
     });
 

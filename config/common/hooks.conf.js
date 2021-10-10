@@ -1,9 +1,10 @@
-import { addCommands } from '../../helpers/setup.helper';
+import { addCommands, getAuthData } from '../../helpers/setup.helper';
 import allureReporter from '@wdio/allure-reporter';
 
 module.exports = {
     before: async function (capabilities, specs, browser) {
         await addCommands();
+        await getAuthData();
     },
 
     afterTest: async function (test, context, result) {
