@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "WebdriverIO tests for localcoding.us",
   "scripts": {
+    "test:selenoid": "npx wdio run config/selenoid.conf.js",
     "test:chrome": "npx wdio run config/chrome.conf.js",
     "test:chrome:headless": "npx wdio run config/chrome.headless.conf.js",
     "test:firefox": "npx wdio run config/firefox.conf.js",
